@@ -15,6 +15,7 @@ __pycache__/
 db.sqlite3
 sqlite3
 new.file
+new_file
 sqlite.db
 dist
 venv

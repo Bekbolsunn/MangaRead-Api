@@ -1,7 +1,9 @@
 asgiref==3.5.2
+black==23.1.0
 certifi==2022.12.7
 cffi==1.15.1
 charset-normalizer==2.1.1
+click==8.1.3
 cryptography==38.0.4
 defusedxml==0.7.1
 Django==4.1.4
@@ -10,9 +12,13 @@ django-phonenumber-field==7.0.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 idna==3.4
+mypy-extensions==1.0.0
 oauthlib==3.2.2
+packaging==23.0
+pathspec==0.11.0
 phonenumberslite==8.13.1
 Pillow==9.3.0
+platformdirs==3.0.0
 pycparser==2.21
 PyJWT==2.6.0
 python-decouple==3.6
