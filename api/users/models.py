@@ -8,15 +8,13 @@ from ..users.managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField("Имя", max_length=100, unique=True)
-    email = models.EmailField("Почта", db_index=True)
     nickname = models.CharField("Прозвище", max_length=50, unique=True)
     avatar = models.ImageField(
         "Фото профиля",
         upload_to=get_path_upload_avatar,
-        blank=True,
-        null=True,
+        default='https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg',
         validators=[
-            FileExtensionValidator(allowed_extensions=["jpg"]),
+            FileExtensionValidator(allowed_extensions=["jpg", "png"]),
             validate_size_image,
         ],
     )
@@ -26,7 +24,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField("Дата регистрации", auto_now_add=True)
 
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["email"]
+    REQUIRED_FIELDS = ["nickname"]
 
     objects = UserManager()
 

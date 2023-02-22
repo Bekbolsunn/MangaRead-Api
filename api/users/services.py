@@ -16,16 +16,6 @@ def validate_size_image(file_object):
         raise ValidationError(f"Максимальный размер {size_limit}MB")
 
 
-class PasswordFieldService(serializers.CharField):
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault("style", {})
-
-        kwargs["style"]["input_type"] = "password"
-        kwargs["write_only"] = True
-
-        super().__init__(*args, **kwargs)
-
-
 class GetLoginResponseService:
     @staticmethod
     def get_login_response(user, request):

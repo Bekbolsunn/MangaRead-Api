@@ -3,9 +3,9 @@ from pathlib import Path
 from datetime import timedelta
 from decouple import config, Csv
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = config("SECRET_KEY")
-PRODUCTION = 1
+# PRODUCTION = 1
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*", cast=Csv())
@@ -27,18 +27,17 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites",
 ]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
-    # "drf_yasg2",
-    # 'django_filters',
+    "jazzmin",
+    "drf_yasg",
 ]
 
 PROJECT_APPS = [
-    "api.card",
+    "api.cards",
     "api.users",
 ]
 
@@ -65,14 +64,15 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
+    "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ],
+    ),
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ),
+    # 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 30,
     # "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
@@ -134,7 +134,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
