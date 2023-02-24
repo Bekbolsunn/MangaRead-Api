@@ -1,7 +1,7 @@
 from django.urls import path, include
 from ..users.views import (
     RegisterUserView,
-    LoginAPIView,
+    LoginUserAPIView,
     ListUserView,
 )
 
@@ -17,7 +17,7 @@ app_name = "users"
 
 urlpatterns = [
     path("register/", RegisterUserView.as_view(), name="Sign Up"),
-    path("login/", LoginAPIView.as_view(), name="Sign In"),
+    path("login/", LoginUserAPIView.as_view(), name="Sign In"),
     path("list/", ListUserView.as_view(), name="User list"),
     # JWT
     path("login/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),

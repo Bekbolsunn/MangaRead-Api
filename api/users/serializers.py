@@ -1,9 +1,5 @@
 # django imports
 from rest_framework import serializers
-from django.core.validators import FileExtensionValidator
-
-# package imports
-from phonenumber_field.serializerfields import PhoneNumberField
 
 # local imports
 from api.users.models import User
@@ -15,12 +11,16 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "username",
+            "nickname",
+            "avatar",
             "is_staff",
             "is_active",
             "is_superuser",
             "date_joined",
         )
         read_only_fields = ("date_joined",)
+
+
 
 
 class RegisterSerializers(serializers.ModelSerializer):
@@ -35,18 +35,20 @@ class RegisterSerializers(serializers.ModelSerializer):
         max_length=25,
         write_only=True,
         required=True,
-        style={'input_type': 'password'},
+        style={"input_type": "password"},
         help_text="min length 8, max length 25",
     )
 
     class Meta:
         model = User
         fields = [
+            "id",
             "username",
             "nickname",
             "password",
             "avatar",
         ]
+        read_only_fields = ("id",)
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
@@ -55,6 +57,10 @@ class RegisterSerializers(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=255, required=True)
     password = serializers.CharField(
-        max_length=25, min_length=8, write_only=True, required=True, style={'input_type': 'password'},
+        max_length=25,
+        min_length=8,
+        write_only=True,
+        required=True,
+        style={"input_type": "password"},
         help_text="min length 8, max length 25",
     )

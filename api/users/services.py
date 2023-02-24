@@ -1,16 +1,16 @@
-from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-
+import os
 from django.core.exceptions import ValidationError
 
 
 def get_path_upload_avatar(instance, file):
-    """Путь для хранения аватарок format:(media)/avatar/user_id/photo.jpg"""
-    return f"avatar/{instance.id}/{file}"
+    upload_to = "avatar"
+    ext = file.split(".")[-1]
+    file = f"{instance.username}.{ext}"
+    return os.path.join(upload_to, file)
 
 
 def validate_size_image(file_object):
-    """Проверка размера файла"""
     size_limit = 2
     if file_object.size > size_limit * 1024 * 1024:
         raise ValidationError(f"Максимальный размер {size_limit}MB")

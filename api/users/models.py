@@ -7,12 +7,12 @@ from ..users.managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField("Имя", max_length=100, unique=True)
+    username = models.CharField("Имя", max_length=100, unique=True, )
     nickname = models.CharField("Прозвище", max_length=50, unique=True)
     avatar = models.ImageField(
         "Фото профиля",
         upload_to=get_path_upload_avatar,
-        default='https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg',
+        default="default/mem.jpg",
         validators=[
             FileExtensionValidator(allowed_extensions=["jpg", "png"]),
             validate_size_image,
