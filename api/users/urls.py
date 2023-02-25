@@ -1,17 +1,14 @@
 from django.urls import path, include
-from ..users.views import (
+from api.users.views import (
     RegisterUserView,
     LoginUserAPIView,
     ListUserView,
 )
 
-from rest_framework.routers import SimpleRouter
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-# ROUTER = SimpleRouter()
-# ROUTER.register(r"profile", ProfileViewSet, "profile")
 
 app_name = "users"
 
@@ -21,5 +18,4 @@ urlpatterns = [
     path("list/", ListUserView.as_view(), name="User list"),
     # JWT
     path("login/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    # path("", include(ROUTER.urls)),
 ]

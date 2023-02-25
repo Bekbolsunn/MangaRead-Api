@@ -27,4 +27,5 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
+    "AUTH_HEADER_TYPES": ("Bearer", "JWT"),
 }

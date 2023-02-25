@@ -7,7 +7,7 @@ from core.settings.yasg import urlpatterns as doc_urls
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/users/", include("api.users.urls"), name="users"),
-    # path("api/v1/cards/", include("publications.urls"), name="cards"),
+    path("api/v1/cards/", include("api.cards.urls"), name="cards"),
 ]
 urlpatterns += doc_urls
 

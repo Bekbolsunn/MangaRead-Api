@@ -2,17 +2,21 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.core.validators import FileExtensionValidator
 
-from ..users.services import get_path_upload_avatar, validate_size_image
-from ..users.managers import UserManager
+from api.users.services import get_path_upload_avatar, validate_size_image
+from api.users.managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField("Имя", max_length=100, unique=True, )
+    username = models.CharField(
+        "Имя",
+        max_length=100,
+        unique=True,
+    )
     nickname = models.CharField("Прозвище", max_length=50, unique=True)
     avatar = models.ImageField(
         "Фото профиля",
         upload_to=get_path_upload_avatar,
-        default="default/mem.jpg",
+        default="default/default.jpg",
         validators=[
             FileExtensionValidator(allowed_extensions=["jpg", "png"]),
             validate_size_image,

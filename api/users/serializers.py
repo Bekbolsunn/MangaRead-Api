@@ -21,8 +21,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ("date_joined",)
 
 
-
-
 class RegisterSerializers(serializers.ModelSerializer):
     username = serializers.CharField(
         max_length=100, required=True, help_text="max length 100"
@@ -41,13 +39,13 @@ class RegisterSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = [
+        fields = (
             "id",
             "username",
             "nickname",
             "password",
             "avatar",
-        ]
+        )
         read_only_fields = ("id",)
 
     def create(self, validated_data):

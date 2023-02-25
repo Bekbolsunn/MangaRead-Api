@@ -79,8 +79,6 @@ TEMPLATES = [
 ]
 
 
-
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -113,7 +111,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-from.jazzmin import *
+from .jazzmin import *
 
 if not PRODUCTION:
     from .local import *

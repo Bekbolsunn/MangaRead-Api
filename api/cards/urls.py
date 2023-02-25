@@ -1,25 +1,16 @@
 from django.urls import path, include
-from ..users.views import (
-    RegisterUserView,
-    LoginAPIView,
-    ListUserView,
-)
+from api.cards.views import (TypeMangaViewSet, MangaViewSet, GenreMangaViewSet, ReviewViewSet)
 
-from rest_framework.routers import SimpleRouter
-from rest_framework_simplejwt.views import (
-    TokenRefreshView,
-)
+from rest_framework.routers import SimpleRouter, DefaultRouter
 
-# ROUTER = SimpleRouter()
-# ROUTER.register(r"profile", ProfileViewSet, "profile")
+ROUTER = DefaultRouter()
+ROUTER.register("type", TypeMangaViewSet, "Type")
+ROUTER.register("mango", MangaViewSet, "Manga")
+ROUTER.register("genre", GenreMangaViewSet, "Genre")
+ROUTER.register("review", ReviewViewSet, "Genre")
 
-app_name = "users"
+app_name = "mango"
 
 urlpatterns = [
-    path("register/", RegisterUserView.as_view(), name="Sign Up"),
-    path("login/", LoginAPIView.as_view(), name="Sign In"),
-    path("list/", ListUserView.as_view(), name="User list"),
-    # JWT
-    path("login/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    # path("", include(ROUTER.urls)),
+    path("", include(ROUTER.urls)),
 ]
