@@ -68,3 +68,5 @@ class MangaDetailSerializer(serializers.ModelSerializer):
         fields = (
             "__all__"
         )
+
+#helllo onichan
