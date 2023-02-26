@@ -1,7 +1,9 @@
+# django imports
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.core.validators import FileExtensionValidator
 
+# local imports
 from api.users.services import get_path_upload_avatar, validate_size_image
 from api.users.managers import UserManager
 

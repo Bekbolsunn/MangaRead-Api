@@ -1,5 +1,8 @@
-from .env_reader import env, csv
+# python imports
 from datetime import timedelta
+
+# local imports
+from core.settings.env_reader import env, csv
 
 SECRET_KEY = env("SECRET_KEY")
 

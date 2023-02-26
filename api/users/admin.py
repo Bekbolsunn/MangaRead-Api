@@ -1,7 +1,9 @@
+# django imports
 from django.contrib import admin
-from api.users.models import User
-
 from django.utils.safestring import mark_safe
+
+# local imports
+from api.users.models import User
 
 
 class UserAdmin(admin.ModelAdmin):

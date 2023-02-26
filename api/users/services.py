@@ -1,6 +1,6 @@
+from django.core.exceptions import ValidationError
 from rest_framework_simplejwt.tokens import RefreshToken
 import os
-from django.core.exceptions import ValidationError
 
 
 def get_path_upload_avatar(instance, file):

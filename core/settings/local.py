@@ -1,6 +1,9 @@
-from .env_reader import env, csv
+# python imports
 from datetime import timedelta
 from pathlib import Path
+
+# local imports
+from core.settings.env_reader import env, csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 

@@ -1,7 +1,10 @@
+# django imports
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+
+# local imports
 from core.settings.yasg import urlpatterns as doc_urls
 
 urlpatterns = [

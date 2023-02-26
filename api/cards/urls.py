@@ -1,7 +1,15 @@
+# django imports
 from django.urls import path, include
-from api.cards.views import (TypeMangaViewSet, MangaViewSet, GenreMangaViewSet, ReviewViewSet)
+from rest_framework.routers import DefaultRouter
 
-from rest_framework.routers import SimpleRouter, DefaultRouter
+# local imports
+from api.cards.views import (
+    TypeMangaViewSet,
+    MangaViewSet,
+    GenreMangaViewSet,
+    ReviewViewSet,
+)
+
 
 ROUTER = DefaultRouter()
 ROUTER.register("type", TypeMangaViewSet, "Type")

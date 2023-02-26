@@ -4,12 +4,18 @@ from rest_framework import views, generics
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.filters import SearchFilter
+
 
 # local imports
 from api.users.models import User
 from api.users.services import GetLoginResponseService
-from api.users.serializers import RegisterSerializers, LoginSerializer, UserSerializer
 from api.users.paginations import UserPagination
+from api.users.serializers import (
+    RegisterSerializers,
+    LoginSerializer,
+    UserSerializer,
+)
 
 
 class ListUserView(generics.ListAPIView):
@@ -17,6 +23,8 @@ class ListUserView(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsAdminUser,)
     pagination_class = UserPagination
+    filter_backends = [SearchFilter]
+    search_fields = ["name", "nickname"]
 
 
 class RegisterUserView(generics.CreateAPIView):

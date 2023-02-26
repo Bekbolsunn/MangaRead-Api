@@ -1,7 +1,9 @@
+# django imports
 import os
 from pathlib import Path
-from datetime import timedelta
-from .env_reader import env, csv
+
+# local imports
+from core.settings.env_reader import env, csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PRODUCTION = env("PRODUCTION", default=False, cast=bool)
@@ -9,7 +11,6 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=csv())
 ROOT_URLCONF = "core.urls"
 WSGI_APPLICATION = "core.wsgi.application"
 AUTH_USER_MODEL = "users.User"
-
 
 DJANGO_APPS = [
     "jazzmin",
@@ -24,14 +25,13 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_yasg",
+    "django_filters",
 ]
-
 
 PROJECT_APPS = [
     "api.cards",
     "api.users",
 ]
-
 
 INSTALLED_APPS = [
     *DJANGO_APPS,
@@ -60,6 +60,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 TEMPLATES = [
@@ -77,7 +78,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,8 +110,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-from .jazzmin import *
+from core.settings.jazzmin import *
 
 if not PRODUCTION:
     from .local import *

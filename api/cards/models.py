@@ -1,7 +1,10 @@
+# django imports
 from django.db import models
+from django.core.validators import FileExtensionValidator
+
+# local imports
 from api.users.models import User
 from api.cards.services import get_path_upload_cover, validate_size_image
-from django.core.validators import FileExtensionValidator
 
 
 class TypeManga(models.Model):
@@ -48,7 +51,7 @@ class Manga(models.Model):
         null=True,
     )
     genre_manga = models.ManyToManyField(
-        GenreManga, related_name="Жанр_манги", blank=True, null=True
+        GenreManga, related_name="Жанр_манги", blank=True
     )
 
     def __str__(self):
@@ -60,7 +63,7 @@ class Manga(models.Model):
 
 
 class Review(models.Model):
-    manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE, related_name="review")
     text = models.TextField("Текст", max_length=255, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateField("Дата создания", auto_now_add=True)

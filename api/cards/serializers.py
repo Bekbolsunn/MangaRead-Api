@@ -1,5 +1,13 @@
+# django imports
 from rest_framework import serializers
-from api.cards.models import TypeManga, GenreManga, Manga, Review
+
+# local imports
+from api.cards.models import (
+    TypeManga,
+    GenreManga,
+    Manga,
+    Review,
+)
 
 
 class TypeMangaSerializer(serializers.ModelSerializer):
@@ -24,10 +32,16 @@ class GenreMangaSerializer(serializers.ModelSerializer):
         )
 
 
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = "__all__"
+
+
 class MangaSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=50, min_length=2)
     year = serializers.IntegerField()
-
+    # review = serializers.PrimaryKeyRelatedField(many=True, queryset=Review.objects.all())
 
     class Meta:
         model = Manga
@@ -40,24 +54,14 @@ class MangaSerializer(serializers.ModelSerializer):
             "publish_date",
             "type_manga",
             "genre_manga",
+            # "review",
         )
         read_only_fields = (
             "id",
             "publish_date",
+            # "review",
         )
 
-class ReviewSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    text = serializers.CharField(max_length=255, required=True)
-
-    class Meta:
-        model = Review
-        fields = (
-            "id",
-            "text",
-            "user",
-            "manga",
-        )
 
 class MangaDetailSerializer(serializers.ModelSerializer):
     genre_manga = GenreMangaSerializer(many=True)
@@ -65,8 +69,4 @@ class MangaDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Manga
-        fields = (
-            "__all__"
-        )
-
-#helllo onichan
+        fields = "__all__"

@@ -1,5 +1,5 @@
-import os
 from django.core.exceptions import ValidationError
+import os
 
 
 def get_path_upload_cover(instance, file):

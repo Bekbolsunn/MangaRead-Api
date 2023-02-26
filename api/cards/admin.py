@@ -1,6 +1,9 @@
+# django imports
 from django.contrib import admin
-from api.cards.models import Manga, TypeManga, GenreManga, Review
 from django.utils.safestring import mark_safe
+
+# local imports
+from api.cards.models import Manga, TypeManga, GenreManga, Review
 
 
 @admin.register(Manga)

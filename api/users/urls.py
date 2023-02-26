@@ -1,12 +1,12 @@
-from django.urls import path, include
+# django imports
+from django.urls import path
+from rest_framework_simplejwt.views import TokenRefreshView
+
+# local imports
 from api.users.views import (
     RegisterUserView,
     LoginUserAPIView,
     ListUserView,
-)
-
-from rest_framework_simplejwt.views import (
-    TokenRefreshView,
 )
 
 
