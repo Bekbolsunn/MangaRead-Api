@@ -27,8 +27,11 @@ class MangaAdmin(admin.ModelAdmin):
         "preview",
     )
 
+
     def preview(self, obj):
-        return mark_safe(f'<img src="{obj.cover.url}" style="max-height: 100px;">')
+        if obj.cover:
+            return mark_safe(f'<img src="{obj.cover.url}" style="max-height: 100px;">')
+        return None
 
 
 @admin.register(Review)

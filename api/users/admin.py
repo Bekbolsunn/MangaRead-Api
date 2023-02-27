@@ -37,7 +37,8 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ("username",)
 
     def preview(self, obj):
-        return mark_safe(f'<img src="{obj.avatar.url}" style="max-height: 100px;">')
-
+        if obj.avatar:
+            return mark_safe(f'<img src="{obj.avatar.url}" style="max-height: 100px;">')
+        return None
 
 admin.site.register(User, UserAdmin)

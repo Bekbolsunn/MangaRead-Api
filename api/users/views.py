@@ -1,6 +1,6 @@
 # django imports
 from django.contrib.auth import login, authenticate
-from rest_framework import views, generics
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import AllowAny, IsAdminUser
@@ -33,7 +33,7 @@ class RegisterUserView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
 
 
-class LoginUserAPIView(views.APIView):
+class LoginUserAPIView(generics.CreateAPIView):
     serializer_class = LoginSerializer
     permission_classes = (AllowAny,)
 

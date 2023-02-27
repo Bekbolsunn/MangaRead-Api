@@ -6,7 +6,7 @@ from core.settings.env_reader import env, csv
 
 SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = env("DEBUG", default=False, cast=bool)
+DEBUG = env("DEBUG", default=True, cast=bool)
 
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=csv())
@@ -14,12 +14,12 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=csv())
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": env("POSTGRES_DB"),
-        "USER": env("POSTGRES_USER"),
-        "PASSWORD": env("POSTGRES_PASSWORD"),
-        "HOST": env("POSTGRES_HOST"),
-        "PORT": env("POSTGRES_PORT"),
+        "ENGINE": "django.db.backends.postgresql-pcycopg2",
+        "NAME": env("DATABASE_NAME"),
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASSWORD"),
+        "HOST": env("DATABASE_HOST"),
+        "PORT": env("DATABASE_PORT"),
     }
 }
 

@@ -1,8 +1,9 @@
 # django imports
-from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.filters import SearchFilter
 from rest_framework import viewsets
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+from django_filters.rest_framework import DjangoFilterBackend
 
 # local imports
 from api.cards.models import (
@@ -32,24 +33,26 @@ class TypeMangaViewSet(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (AllowAny,)
     pagination_class = TypePagination
-    filter_backends = [SearchFilter, OrderingFilter]
+    filter_backends = [SearchFilter]
     search_fields = ["name"]
-    ordering_fields = ["name", "id"]
 
 
 class MangaViewSet(viewsets.ModelViewSet):
+
     def get_serializer_class(self):
-        if self.action == "retrive":
+        if self.action == 'retrieve':
+
             return MangaDetailSerializer
         return MangaSerializer
-
+    
     queryset = Manga.objects.all()
     authentication_classes = (JWTAuthentication,)
     permission_classes = (AllowAny,)
     pagination_class = CardPagination
-    filter_backends = [SearchFilter, OrderingFilter]
+    filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ["name", "id", "year"]
-    ordering_fields = ["name", "year", "genre_manga", "type_manga"]
+    filterset_fields = ['genre_manga', 'type_manga', 'year']
+
 
 
 class GenreMangaViewSet(viewsets.ModelViewSet):
@@ -58,9 +61,8 @@ class GenreMangaViewSet(viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (AllowAny,)
     pagination_class = GenrePagination
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ["name", "id", "year"]
-    ordering_fields = ["name", "year", "genre_manga", "type_manga"]
+    filter_backends = [SearchFilter]
+    search_fields = ["name"]
 
 
 class ReviewViewSet(viewsets.ModelViewSet):

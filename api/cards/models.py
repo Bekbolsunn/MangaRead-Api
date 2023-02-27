@@ -17,6 +17,8 @@ class TypeManga(models.Model):
         verbose_name = "Тип"
         verbose_name_plural = "Типы"
 
+        
+
 
 class GenreManga(models.Model):
     name = models.CharField("Название", max_length=50, blank=True, unique=True)
@@ -33,8 +35,9 @@ class Manga(models.Model):
     name = models.CharField("Название", max_length=100, unique=True, blank=True)
     cover = models.ImageField(
         "Обложка",
+        blank=True,
+        null=True,
         upload_to=get_path_upload_cover,
-        default="default/cover.jpg",
         validators=[
             FileExtensionValidator(allowed_extensions=["jpg", "png"]),
             validate_size_image,
@@ -46,17 +49,17 @@ class Manga(models.Model):
     type_manga = models.ForeignKey(
         TypeManga,
         on_delete=models.CASCADE,
-        related_name="Тип_манги",
+        related_name="manga",
         blank=True,
         null=True,
     )
     genre_manga = models.ManyToManyField(
-        GenreManga, related_name="Жанр_манги", blank=True
+        GenreManga, related_name="manga", blank=True
     )
 
     def __str__(self):
         return f"Название: {self.name}"
-
+    
     class Meta:
         verbose_name = "Манга"
         verbose_name_plural = "Манги"

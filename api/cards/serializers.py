@@ -35,13 +35,50 @@ class GenreMangaSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = "__all__"
+        fields = (
+            'id',
+            'manga',
+            'text',
+            'user',
+            'created_date',
+        )
+        read_only_fields = (
+            'id',
+            'created_date',
+        )
 
 
 class MangaSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=50, min_length=2)
-    year = serializers.IntegerField()
-    # review = serializers.PrimaryKeyRelatedField(many=True, queryset=Review.objects.all())
+
+    class Meta:
+        model = Manga
+        fields = (
+            "id",
+            "name",
+            "cover",
+            "year",
+            "synopsis",
+            "type_manga",
+            "genre_manga",
+        )
+        read_only_fields = (
+            "id",
+        )
+
+
+class MangaDetailSerializer(MangaSerializer):
+    review = ReviewSerializer(many=True)
+    # type_name = serializers.SerializerMethodField()
+    # genre_name = serializers.SerializerMethodField()
+    
+
+    # def get_type_name(self, instance):
+    #     return instance.type_manga.name
+    
+    # def get_genre_name(self, instance):
+    #     return list(map(lambda manga: manga.name, instance.genre_manga.all()))
+
 
     class Meta:
         model = Manga
@@ -54,19 +91,11 @@ class MangaSerializer(serializers.ModelSerializer):
             "publish_date",
             "type_manga",
             "genre_manga",
-            # "review",
+            # "type_name",
+            # "genre_name",
+            "review",
         )
         read_only_fields = (
             "id",
             "publish_date",
-            # "review",
         )
-
-
-class MangaDetailSerializer(serializers.ModelSerializer):
-    genre_manga = GenreMangaSerializer(many=True)
-    type_manga = TypeMangaSerializer(many=False)
-
-    class Meta:
-        model = Manga
-        fields = "__all__"

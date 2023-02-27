@@ -17,8 +17,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     nickname = models.CharField("Прозвище", max_length=50, unique=True)
     avatar = models.ImageField(
         "Фото профиля",
+        blank=True,
+        null=True,
         upload_to=get_path_upload_avatar,
-        default="default/default.jpg",
         validators=[
             FileExtensionValidator(allowed_extensions=["jpg", "png"]),
             validate_size_image,

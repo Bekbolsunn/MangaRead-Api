@@ -12,10 +12,10 @@ from api.cards.views import (
 
 
 ROUTER = DefaultRouter()
-ROUTER.register("type", TypeMangaViewSet, "Type")
 ROUTER.register("mango", MangaViewSet, "Manga")
+ROUTER.register("type", TypeMangaViewSet, "Type")
 ROUTER.register("genre", GenreMangaViewSet, "Genre")
-ROUTER.register("review", ReviewViewSet, "Genre")
+ROUTER.register("review", ReviewViewSet, "review")
 
 app_name = "mango"
 
