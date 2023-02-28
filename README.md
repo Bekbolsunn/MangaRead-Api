@@ -10,15 +10,14 @@
 
 - Python >= 3.11.1
 - Django Rest Framework
-- Postgres
-- SimpleJWT
+- Postgres 14.3
+- SimpleJwt
 - Docker
 
 ## Старт
 
 ##### 1) .env
 
-    # Data Base
     SECRET_KEY=
     DB_NAME=
     DB_USER=
@@ -31,16 +30,14 @@
 
 #### 2) Создать образ
 
-    docker-compose build
+    docker compose build
 
 ##### 3) Запустить контейнер
 
-    docker-compose up
+    docker compose up
 
 ##### 4) Перейти по адресу
 
     http://127.0.0.1:8000/
 
 
-##### 5) Быстро и легко
-    django-compose up --build

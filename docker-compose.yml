@@ -1,26 +1,26 @@
-version: "3.9"
+version: "3.3"
 
 services:
-  mango_postgres:
-    image: postgres:14
-    container_name: mango_postgres
+  database:
+    image: postgres:latest
+    hostname: database
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       -  5434:5432
     env_file:
-      - .env 
+      - ./.env
 
-  mango_read:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    image: mr_djangorest:latest
-    container_name: mr_djangorest
-    depends_on:
-      - mango_read
+  web:
+    build: .
+    command: python /MangaRead/manage.py runserver 0.0.0.0:8000
     volumes:
-      -
+      - .:/MangaRead
+    ports:
+      - 8000:8000
+    depends_on:
+      - database
 
 volumes:
   postgres_data:
+
