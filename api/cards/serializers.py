@@ -50,6 +50,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class MangaSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=50, min_length=2)
+    year = serializers.IntegerField(default=0)
 
     class Meta:
         model = Manga
@@ -69,16 +70,6 @@ class MangaSerializer(serializers.ModelSerializer):
 
 class MangaDetailSerializer(MangaSerializer):
     review = ReviewSerializer(many=True)
-    # type_name = serializers.SerializerMethodField()
-    # genre_name = serializers.SerializerMethodField()
-    
-
-    # def get_type_name(self, instance):
-    #     return instance.type_manga.name
-    
-    # def get_genre_name(self, instance):
-    #     return list(map(lambda manga: manga.name, instance.genre_manga.all()))
-
 
     class Meta:
         model = Manga
@@ -91,8 +82,6 @@ class MangaDetailSerializer(MangaSerializer):
             "publish_date",
             "type_manga",
             "genre_manga",
-            # "type_name",
-            # "genre_name",
             "review",
         )
         read_only_fields = (
