@@ -112,7 +112,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 from core.settings.jazzmin import *
 
-if not PRODUCTION:
-    from .local import *
-else:
+if PRODUCTION:
     from .production import *
+else:
+    from .local import *
