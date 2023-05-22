@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=csv())
+ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=csv(), default='*')
 
 
 DEBUG = env("DEBUG", default=True, cast=bool)
